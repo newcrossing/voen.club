@@ -33,7 +33,6 @@ $(document).ready(function () {
         }
     });
 
-  
 
     $("#num").change(function () {
         if ($(this).val() == 3) {
@@ -156,13 +155,19 @@ $(document).ready(function () {
         });
 
         request.done(function (msg) {
-          //  alert(msg);
+            //  alert(msg);
             var json = JSON.parse(msg);
             $("#upr_1_ball").html(json.ball + ' балл(ов) ');
             $("#upr_1_recomend_ball").html(json.ball);
             $("#upr_1_help").html(json.text);
             $("#upr_1_recomend").html(json.text2);
             $("#upr_1_ball, #upr_1_help, #upr_1_recomend_color").removeClass('text-muted text-danger text-success').addClass(json.color);
+
+            // подсчет общего результа
+            let b1 = Number($("#upr_1_recomend_ball").text());
+            let b2 = Number($("#upr_2_recomend_ball").text());
+            let b3 = Number($("#upr_3_recomend_ball").text());
+            $("#upr_itog_recomend_ball").html(b1 + b2 + b3);
         });
 
         request.fail(function (jqXHR, textStatus) {
@@ -195,6 +200,12 @@ $(document).ready(function () {
             $("#upr_2_help").html(json.text);
             $("#upr_2_recomend").html(json.text2);
             $("#upr_2_ball, #upr_2_help, #upr_2_recomend_color").removeClass('text-muted text-danger text-success').addClass(json.color);
+
+// подсчет общего результа
+            let b1 = Number($("#upr_1_recomend_ball").text());
+            let b2 = Number($("#upr_2_recomend_ball").text());
+            let b3 = Number($("#upr_3_recomend_ball").text());
+            $("#upr_itog_recomend_ball").html(b1 + b2 + b3);
         });
 
         request.fail(function (jqXHR, textStatus) {
@@ -220,13 +231,20 @@ $(document).ready(function () {
         });
 
         request.done(function (msg) {
-            //  alert(msg);
+          //  alert(msg);
             var json = JSON.parse(msg);
             $("#upr_3_ball").html(json.ball + ' балл(ов) ');
             $("#upr_3_recomend_ball").html(json.ball);
             $("#upr_3_help").html(json.text);
             $("#upr_3_recomend").html(json.text2);
             $("#upr_3_ball, #upr_3_help, #upr_3_recomend_color").removeClass('text-muted text-danger text-success').addClass(json.color);
+
+
+            // подсчет общего результа
+            let b1 = Number($("#upr_1_recomend_ball").text());
+            let b2 = Number($("#upr_2_recomend_ball").text());
+            let b3 = Number($("#upr_3_recomend_ball").text());
+            $("#upr_itog_recomend_ball").html(b1 + b2 + b3);
         });
 
         request.fail(function (jqXHR, textStatus) {

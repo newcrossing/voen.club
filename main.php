@@ -24,7 +24,25 @@ $REZ = floatval(str_replace(",", ".", $_POST['rez']));
 $AGE = (int)$_POST['age'];
 $SEX = (int)$_POST['sex'];
 // название таблицы для БД в зависимости от пола
-$UPR = ($SEX) ? 'upr_'.$_POST['upr'] : 'upr_'.$_POST['upr'].'_w';
+if ($SEX) { // если мужчины
+    // если упражнения с разделением на возраст
+    if ($_POST['upr'] == 45 || $_POST['upr'] == 46) {
+        $UPR = ($AGE == 1 || $AGE == 2 || $AGE == 3) ? 'upr_'.$_POST['upr'].'_1' : 'upr_'.$_POST['upr'].'_2';
+    } else {
+        $UPR = 'upr_'.$_POST['upr'];
+    }
+} else {
+    // если женщины
+    // если упражнения с разделением на возраст
+    if ($_POST['upr'] == 1 || $_POST['upr'] == 2 || $_POST['upr'] == 40 || $_POST['upr'] == 41 || $_POST['upr'] == 42
+            || $_POST['upr'] == 45 || $_POST['upr'] == 57 || $_POST['upr'] == 58) {
+        $UPR = ($AGE == 1 || $AGE == 2) ? 'upr_'.$_POST['upr'].'_1_w' : 'upr_'.$_POST['upr'].'_2_w';
+    } else {
+        $UPR = 'upr_'.$_POST['upr'].'_w';
+    }
+}
+
+
 
 // выходной json
 $JSON = array(
