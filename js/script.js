@@ -201,4 +201,36 @@ $(document).ready(function () {
             alert("Request failed: " + textStatus);
         });
     });
+
+    // изменение третьего  упражнения
+    $("#upr_3_rez").change(function () {
+
+        $("#upr_3_ball").html('');
+
+        let upr3 = $("#upr_3_select").val();
+        let sex = $("#sex").val();
+        let age = $("#age").val();
+        let rez = $("#upr_3_rez").val();
+
+        var request = $.ajax({
+            url: "main.php",
+            type: "POST",
+            data: {type: 'ball', upr: upr3, age: age, sex: sex, rez: rez},
+            dataType: "html"
+        });
+
+        request.done(function (msg) {
+            //  alert(msg);
+            var json = JSON.parse(msg);
+            $("#upr_3_ball").html(json.ball + ' балл(ов) ');
+            $("#upr_3_recomend_ball").html(json.ball);
+            $("#upr_3_help").html(json.text);
+            $("#upr_3_recomend").html(json.text2);
+            $("#upr_3_ball, #upr_3_help, #upr_3_recomend_color").removeClass('text-muted text-danger text-success').addClass(json.color);
+        });
+
+        request.fail(function (jqXHR, textStatus) {
+            alert("Request failed: " + textStatus);
+        });
+    });
 });
