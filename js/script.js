@@ -1,5 +1,33 @@
 $(document).ready(function () {
+
+    // сброс результатов
+    function reset(){
+        $("#upr_1_rez").val('');
+        $("#upr_2_rez").val('');
+        $("#upr_3_rez").val('');
+
+        $("#upr_1_ball").html('');
+        $("#upr_1_help").html('');
+        $("#upr_2_ball").html('');
+        $("#upr_2_help").html('');
+        $("#upr_3_ball").html('');
+        $("#upr_3_help").html('');
+        $("#upr_1_recomend").html('');
+        $("#upr_1_recomend_ball").html('');
+        $("#upr_2_recomend").html('');
+        $("#upr_2_recomend_ball").html('');
+        $("#upr_3_recomend").html('');
+        $("#upr_3_recomend_ball").html('');
+        $("#upr_itog_recomend_ball").html('');
+
+        $("#upr_1_ball, #upr_1_help, #upr_1_recomend_color").removeClass('text-muted text-danger text-success')
+        $("#upr_2_ball, #upr_2_help, #upr_2_recomend_color").removeClass('text-muted text-danger text-success')
+        $("#upr_2_ball, #upr_2_help, #upr_3_recomend_color").removeClass('text-muted text-danger text-success')
+
+    }
+
     $("#age").change(function () {
+        reset();
         if ($(this).val() == 1) {
             $("#age-help").text("1-я возрастная группа");
         } else if ($(this).val() == 2) {
@@ -22,6 +50,7 @@ $(document).ready(function () {
      * Выбор пола
      */
     $("#sex").change(function () {
+        reset();
         if ($(this).val() == "0") {
             $("#57b_m").hide();
             $("#57b_w").show();
