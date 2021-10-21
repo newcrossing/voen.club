@@ -1,29 +1,35 @@
 $(document).ready(function () {
 
+    // проверка на пустоту
+    function isEmpty(str) {
+        if (str.trim() == '')
+            return true;
+        return false;
+    }
+
+
     // сброс результатов
-    function reset(){
-        $("#upr_1_rez").val('');
-        $("#upr_2_rez").val('');
-        $("#upr_3_rez").val('');
-
-        $("#upr_1_ball").html('');
-        $("#upr_1_help").html('');
-        $("#upr_2_ball").html('');
-        $("#upr_2_help").html('');
-        $("#upr_3_ball").html('');
-        $("#upr_3_help").html('');
-        $("#upr_1_recomend").html('');
-        $("#upr_1_recomend_ball").html('');
-        $("#upr_2_recomend").html('');
-        $("#upr_2_recomend_ball").html('');
-        $("#upr_3_recomend").html('');
-        $("#upr_3_recomend_ball").html('');
-        $("#upr_itog_recomend_ball").html('');
-
-        $("#upr_1_ball, #upr_1_help, #upr_1_recomend_color").removeClass('text-muted text-danger text-success')
-        $("#upr_2_ball, #upr_2_help, #upr_2_recomend_color").removeClass('text-muted text-danger text-success')
-        $("#upr_2_ball, #upr_2_help, #upr_3_recomend_color").removeClass('text-muted text-danger text-success')
-
+    function reset(a = 0) {
+        a = Number(a);
+        // если обнулить надо лишь одно упражнение
+        if (a != 0) {
+            $("#upr_rez_" + a).val('');
+            $("#upr_ball_" + a).html('');
+            $("#upr_help_" + a).html('');
+            return;
+        }
+        // если обнулить все
+        for (let i = 1; i < 5; i++) {
+            $("#upr_rezu_" + i).val('');
+            $("#upr_ball_" + i).html('');
+            $("#upr_help_" + i).html('');
+            $("#recomend_text_" + i).html('');
+            $("#recomend_ball_" + i).html('0');
+            $("#upr_ball_" + i).removeClass('text-muted text-danger text-success');
+            $("#upr_ball_" + i).removeClass('text-muted text-danger text-success');
+            $("#recomend_color_" + i).removeClass('text-muted text-danger text-success');
+            return;
+        }
     }
 
     $("#age").change(function () {
@@ -63,22 +69,29 @@ $(document).ready(function () {
     });
 
 
-    $("#num").change(function () {
+    $("#summ_upr").change(function () {
         if ($(this).val() == 3) {
             $("#upr_4_div1").hide();
             $("#upr_4_div2").hide();
             $("#upr_5_div1").hide();
             $("#upr_5_div2").hide();
+            $("#recomend_block_4").hide();
+            $("#recomend_block_5").hide();
+
         } else if ($(this).val() == 4) {
             $("#upr_4_div1").show();
             $("#upr_4_div2").show();
             $("#upr_5_div1").hide();
             $("#upr_5_div2").hide();
+            $("#recomend_block_4").show();
+            $("#recomend_block_5").hide();
         } else if ($(this).val() == 5) {
             $("#upr_4_div1").show();
             $("#upr_4_div2").show();
             $("#upr_5_div1").show();
             $("#upr_5_div2").show();
+            $("#recomend_block_4").show();
+            $("#recomend_block_5").show();
         }
     });
 
@@ -166,114 +179,95 @@ $(document).ready(function () {
         }
     });
 
-    // изменение первого упражнения
-    $("#upr_1_rez").change(function () {
 
-        $("#upr_1_ball").html('');
+    // выбор упражнения
+    $("[numupr]").change(function () {
+        // номер выбранного упражнения
+        let numupr = $(this).attr('numupr');
 
-        let upr1 = $("#upr_1_select").val();
+        reset(numupr);
+
+        let upr = $("#upr_select_" + numupr).val();
+        let rez = $("#upr_rezu_" + numupr).val();
         let sex = $("#sex").val();
         let age = $("#age").val();
-        let rez = $("#upr_1_rez").val();
+        let category = $("#category").val();
+        // alert(rez);
 
         var request = $.ajax({
             url: "main.php",
             type: "POST",
-            data: {type: 'ball', upr: upr1, age: age, sex: sex, rez: rez},
+            data: {type: 'ball', upr: upr, age: age, sex: sex, rez: rez, category: category},
             dataType: "html"
         });
 
         request.done(function (msg) {
-            //  alert(msg);
-            var json = JSON.parse(msg);
-            $("#upr_1_ball").html(json.ball + ' балл(ов) ');
-            $("#upr_1_recomend_ball").html(json.ball);
-            $("#upr_1_help").html(json.text);
-            $("#upr_1_recomend").html(json.text2);
-            $("#upr_1_ball, #upr_1_help, #upr_1_recomend_color").removeClass('text-muted text-danger text-success').addClass(json.color);
+            //alert(msg);
+            let json = JSON.parse(msg);
+            $("#upr_ball_" + numupr).html(json.ball + ' баллa(ов) ').removeClass('text-muted text-danger text-success').addClass(json.color);
+            $("#recomend_ball_" + numupr).html(json.ball);
+            $("#upr_help_" + numupr).html(json.text).removeClass('text-muted text-danger text-success').addClass(json.color);
+            $("#recomend_text_" + numupr).html(json.text2);
+            $("#recomend_color_" + numupr).removeClass('text-muted text-danger text-success').addClass(json.color);
 
             // подсчет общего результа
-            let b1 = Number($("#upr_1_recomend_ball").text());
-            let b2 = Number($("#upr_2_recomend_ball").text());
-            let b3 = Number($("#upr_3_recomend_ball").text());
-            $("#upr_itog_recomend_ball").html(b1 + b2 + b3);
-        });
+            let b1 = Number($("#recomend_ball_1").text());
+            let b2 = Number($("#recomend_ball_2").text());
+            let b3 = Number($("#recomend_ball_3").text());
+            let b4 = Number($("#recomend_ball_4").text());
+            let b5 = Number($("#recomend_ball_5").text());
+            let allBall = b1 + b2 + b3 + b4 + b5;
+            $("#upr_itog_recomend_ball").html(allBall);
 
-        request.fail(function (jqXHR, textStatus) {
-            alert("Request failed: " + textStatus);
-        });
-    });
+            let summ_upr = Number($("#summ_upr").val());
 
-    // изменение второго упражнения
-    $("#upr_2_rez").change(function () {
+            let r1 = $("#upr_rezu_1").val();
+            let r2 = $("#upr_rezu_2").val();
+            let r3 = $("#upr_rezu_3").val();
+            let r4 = $("#upr_rezu_4").val();
+            let r5 = $("#upr_rezu_5").val();
 
-        $("#upr_2_ball").html('');
+            /**
+             * Признак заполенности результатов и возможности подсчитать общий результат
+             * @type {boolean}
+             */
+            let complit = false;
 
-        let upr2 = $("#upr_2_select").val();
-        let sex = $("#sex").val();
-        let age = $("#age").val();
-        let rez = $("#upr_2_rez").val();
+            // если три заполнено
+            if (summ_upr == 3 && !isEmpty(r1) && !isEmpty(r2) && !isEmpty(r3))
+                complit = true;
 
-        var request = $.ajax({
-            url: "main.php",
-            type: "POST",
-            data: {type: 'ball', upr: upr2, age: age, sex: sex, rez: rez},
-            dataType: "html"
-        });
+            if (summ_upr == 4 && !isEmpty(r1) && !isEmpty(r2) && !isEmpty(r3) && !isEmpty(r4))
+                complit = true;
 
-        request.done(function (msg) {
-            //  alert(msg);
-            var json = JSON.parse(msg);
-            $("#upr_2_ball").html(json.ball + ' балл(ов) ');
-            $("#upr_2_recomend_ball").html(json.ball);
-            $("#upr_2_help").html(json.text);
-            $("#upr_2_recomend").html(json.text2);
-            $("#upr_2_ball, #upr_2_help, #upr_2_recomend_color").removeClass('text-muted text-danger text-success').addClass(json.color);
+            if (summ_upr == 5 && !isEmpty(r1) && !isEmpty(r2) && !isEmpty(r3) && !isEmpty(r4) && !isEmpty(r5))
+                complit = true;
 
-// подсчет общего результа
-            let b1 = Number($("#upr_1_recomend_ball").text());
-            let b2 = Number($("#upr_2_recomend_ball").text());
-            let b3 = Number($("#upr_3_recomend_ball").text());
-            $("#upr_itog_recomend_ball").html(b1 + b2 + b3);
-        });
+            if (complit) {
+                //Отправка запроса на рассчет общего результа
+                var requestBall = $.ajax({
+                    url: "main.php",
+                    type: "POST",
+                    data: {
+                        type: 'allball',
+                        summ_upr: summ_upr,
+                        age: age,
+                        sex: sex,
+                        rez: allBall,
+                        category: category
+                    },
+                    dataType: "html"
+                });
+                requestBall.done(function (msg) {
+                    //alert(msg);
+                    let json = JSON.parse(msg);
 
-        request.fail(function (jqXHR, textStatus) {
-            alert("Request failed: " + textStatus);
-        });
-    });
-
-    // изменение третьего  упражнения
-    $("#upr_3_rez").change(function () {
-
-        $("#upr_3_ball").html('');
-
-        let upr3 = $("#upr_3_select").val();
-        let sex = $("#sex").val();
-        let age = $("#age").val();
-        let rez = $("#upr_3_rez").val();
-
-        var request = $.ajax({
-            url: "main.php",
-            type: "POST",
-            data: {type: 'ball', upr: upr3, age: age, sex: sex, rez: rez},
-            dataType: "html"
-        });
-
-        request.done(function (msg) {
-          //  alert(msg);
-            var json = JSON.parse(msg);
-            $("#upr_3_ball").html(json.ball + ' балл(ов) ');
-            $("#upr_3_recomend_ball").html(json.ball);
-            $("#upr_3_help").html(json.text);
-            $("#upr_3_recomend").html(json.text2);
-            $("#upr_3_ball, #upr_3_help, #upr_3_recomend_color").removeClass('text-muted text-danger text-success').addClass(json.color);
+                    $("#score").html(json.score);
+                    $("#score_level").html(json.level);
+                });
+            }
 
 
-            // подсчет общего результа
-            let b1 = Number($("#upr_1_recomend_ball").text());
-            let b2 = Number($("#upr_2_recomend_ball").text());
-            let b3 = Number($("#upr_3_recomend_ball").text());
-            $("#upr_itog_recomend_ball").html(b1 + b2 + b3);
         });
 
         request.fail(function (jqXHR, textStatus) {

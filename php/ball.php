@@ -1,5 +1,18 @@
 <?php
 
+if ($UPR == 'upr_00' || $UPR == 'upr_00_w') {
+    $b = $BALL_FROM_OCENKA_M[$AGE][$CATEGORY][$REZ];
+   // $JSON['ball'] = $AGE.'-'.$CATEGORY.'-'.$REZ;
+    $JSON['ball'] = $b;
+    $JSON['color'] = 'text-success';
+    $JSON['text'] = '';
+    $JSON['text2'] = 'Так держать!';
+    $json = json_encode($JSON, JSON_UNESCAPED_UNICODE);
+    echo $json;
+    exit();
+}
+
+
 $res = $db->query('SELECT MAX(rezult) as max, MIN(rezult) as min, type FROM ?f', $UPR);
 $data = $res->fetchAssoc();
 
@@ -18,8 +31,6 @@ if ($data['type'] == 'min') {
     $bad = ($REZ < $min) ? true : false;
     $good = ($REZ > $max) ? true : false;
 }
-
-
 
 
 //проврка на изначально выше и ниже крайних результатов
