@@ -4,7 +4,7 @@ session_start();
 define('_FLAG', 1);
 define('DIR_ROOT', dirname(__FILE__));
 
-
+error_reporting(E_ALL);
 header('Content-Type: application/json');
 
 
@@ -40,13 +40,7 @@ if ($SEX) { // если мужчины
     }
 }
 
-switch (@$_REQUEST['type']) {
-    case 'ball':
-        // подстчет баллов
-        include_once DIR_ROOT.'/php/ball.php';
-        break;
-    case 'allball':
-        // подстчет оценки
-        include_once DIR_ROOT.'/php/allball.php';
-        break;
-}
+//print_r(getRezFromBall(0, 'upr_42'));
+//print_r(diffBallToRez(42, 0,'upr_42'));
+print_r(diffRez('1.3', '2','мин.'));
+

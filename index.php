@@ -9,7 +9,7 @@
     <meta name="docsearch:language" content="ru">
     <meta name="docsearch:version" content="5.0">
     <meta name="yandex-verification" content="2bf0709983ffc58f"/>
-    <title>Онлайн калькулятор по физической подготовке военнослужащих</title>
+    <title>Онлайн калькулятор по физической подготовке военнослужащих Минобороны</title>
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/docs.css">
@@ -124,8 +124,6 @@
                             </div>
                         </div>
                     </div>
-
-
                 </div>
 
 
@@ -136,7 +134,7 @@
                         <option value="4">4</option>
                         <option value="5">5</option>
                     </select>
-
+                    <small class="text-muted">Количество упражнений</small>
                 </div>
 
                 <hr class="my-4">
@@ -144,7 +142,7 @@
 
                 <div class="col-8">
                     <label for="upr_select_1" class="form-label">Скорость</label>
-                    <select class="form-select" id="upr_select_1" required="">
+                    <select class="form-select" id="upr_select_1" required="" numuprselect="1">
                         <option value="40" selected="selected">Упр. № 40 (Бег на 60 м)</option>
                         <option value="41">Упр. № 41 (Бег на 100 м)</option>
                         <option value="42">Упр. № 42 (Челночный бег 10х10 м)</option>
@@ -167,7 +165,7 @@
 
                 <div class="col-8">
                     <label for="upr_select_2" class="form-label">Сила</label>
-                    <select class="form-select" id="upr_select_2" required="">
+                    <select class="form-select" id="upr_select_2" required="" numuprselect="2">
                         <option value="1">Упр. № 1 (Cгибание и разгибание рук в упоре лежа)</option>
                         <option value="2">Упр. № 2 (Наклоны туловища вперед)</option>
                         <option value="4" selected="selected">Упр. № 4 (Подтягивание на перекладине)</option>
@@ -200,7 +198,7 @@
 
                 <div class="col-8">
                     <label for="upr_select_3" class="form-label">Выносливость</label>
-                    <select class="form-select" id="upr_select_3" required="">
+                    <select class="form-select" id="upr_select_3" required="" numuprselect="3">
                         <option value="45">Упр. № 45 (Бег на 1 км)</option>
                         <option value="46">Упр. № 46 (Бег на 3 км)</option>
                         <option value="47">Упр. № 47 (Бег на 5 км)</option>
@@ -221,7 +219,7 @@
 
                 <div class="col-8" id="upr_4_div1" style="display: none">
                     <label for="upr_select_4" class="form-label">Военно-прикладные навыки</label>
-                    <select class="form-select" id="upr_select_4" required="" tag="4">
+                    <select class="form-select" id="upr_select_4" required="" numuprselect="4">
                         <option value="00">Упражнение с оценкой</option>
                         <option value="52" selected="selected">Упр. № 52 (Метание гранаты на дальность)</option>
                         <option value="60">Упр. №60 (Ныряние в длину)</option>
@@ -238,7 +236,7 @@
 
                 <div class="col-8" id="upr_5_div1" style="display: none">
                     <label for="upr_select_5" class="form-label">Ловкость</label>
-                    <select class="form-select" id="upr_select_5" required="">
+                    <select class="form-select" id="upr_select_5" required="" numuprselect="5">
                         <option value="00">Оценка за упражнение на ловкость (5,4,3,2)</option>
                         <option value="51">Упр. № 51 (Тройной прыжок с места)</option>
                     </select>
@@ -247,8 +245,8 @@
 
                 <div class="col-4" id="upr_5_div2" style="display: none">
                     <label for="upr_rezu_5" class="form-label">Результат</label>
-                    <input type="text" class="form-control" id="upr_rezu_5">
-                    <small class="text-muted" id="upr_ball_5">465</small>
+                    <input type="text" class="form-control" id="upr_rezu_5" numupr="5">
+                    <small class="text-muted" id="upr_ball_5"></small>
                 </div>
             </div>
 
@@ -338,7 +336,31 @@
     <footer class="my-5 pt-5 text-muted text-center text-small">
         <p class="mb-1">© 2021 Воен.клаб</p>
         <ul class="list-inline">
-            <li class="list-inline-item"><a href="#">Конфиденциальность</a></li>
+            <li class="list-inline-item">
+                <a class="text-muted " data-toggle="modal" href="#" data-target="#confid"> Что нового</a>
+            </li>
+            <!-- Modal -->
+            <div class="modal fade" id="confid" data-backdrop="static" data-keyboard="false"
+                 tabindex="-1" aria-labelledby="staticBackdropLabel2" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="staticBackdropLabel2"> Новое</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body text-left">
+                            <? include_once('./new.txt') ?>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть
+                            </button>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
 
         </ul>
     </footer>
@@ -350,25 +372,19 @@
 <script src="/js/script.js"></script>
 
 <!-- Yandex.Metrika counter -->
-<script type="text/javascript">
-    (function (m, e, t, r, i, k, a) {
-        m[i] = m[i] || function () {
-            (m[i].a = m[i].a || []).push(arguments)
-        };
-        m[i].l = 1 * new Date();
-        k = e.createElement(t), a = e.getElementsByTagName(t)[0], k.async = 1, k.src = r, a.parentNode.insertBefore(k, a)
-    })
+<script type="text/javascript" >
+    (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
     (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
 
     ym(85995842, "init", {
-        clickmap: true,
-        trackLinks: true,
-        accurateTrackBounce: true
+        clickmap:true,
+        trackLinks:true,
+        accurateTrackBounce:true,
+        webvisor:true
     });
 </script>
-<noscript>
-    <div><img src="https://mc.yandex.ru/watch/85995842" style="position:absolute; left:-9999px;" alt=""/></div>
-</noscript>
+<noscript><div><img src="https://mc.yandex.ru/watch/85995842" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
 <!-- /Yandex.Metrika counter -->
 
 </body>

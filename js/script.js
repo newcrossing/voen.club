@@ -13,9 +13,13 @@ $(document).ready(function () {
         a = Number(a);
         // если обнулить надо лишь одно упражнение
         if (a != 0) {
-            $("#upr_rez_" + a).val('');
+
             $("#upr_ball_" + a).html('');
             $("#upr_help_" + a).html('');
+
+            $("#recomend_text_" + a).html('');
+            $("#recomend_ball_" + a).html('0');
+            $("#recomend_color_" + a).removeClass('text-muted text-danger text-success');
             return;
         }
         // если обнулить все
@@ -28,7 +32,9 @@ $(document).ready(function () {
             $("#upr_ball_" + i).removeClass('text-muted text-danger text-success');
             $("#upr_ball_" + i).removeClass('text-muted text-danger text-success');
             $("#recomend_color_" + i).removeClass('text-muted text-danger text-success');
-            return;
+            $("#upr_itog_recomend_ball").html('0');
+            $("#score").html('');
+            $("#score_level").html('');
         }
     }
 
@@ -68,8 +74,15 @@ $(document).ready(function () {
         }
     });
 
+    // при измении категории обнулить показания
+    $("#category").change(function () {
+        reset();
+    });
 
+    // при измнении количества упражнений
     $("#summ_upr").change(function () {
+        $("#score").html('');
+        $("#score_level").html('');
         if ($(this).val() == 3) {
             $("#upr_4_div1").hide();
             $("#upr_4_div2").hide();
@@ -77,7 +90,6 @@ $(document).ready(function () {
             $("#upr_5_div2").hide();
             $("#recomend_block_4").hide();
             $("#recomend_block_5").hide();
-
         } else if ($(this).val() == 4) {
             $("#upr_4_div1").show();
             $("#upr_4_div2").show();
@@ -97,90 +109,120 @@ $(document).ready(function () {
 
     // placeholder//
 
-    $("#upr_1_select").change(function () {
-        $("#upr_1_rez").val('');
-        $("#upr_1_ball").html('');
-        $("#upr_1_help").html('');
-        if ($(this).val() == 40) {
-            $("#upr_1_rez").attr("placeholder", "7.3 (сек)");
-        } else if ($(this).val() == 41) {
-            $("#upr_1_rez").attr("placeholder", "11.8 (сек)");
-        } else if ($(this).val() == 42) {
-            $("#upr_1_rez").attr("placeholder", "24.0 (сек)");
-        } else if ($(this).val() == 57) {
-            $("#upr_1_rez").attr("placeholder", "1.00 (мин.сек)");
-        } else if ($(this).val() == "57a") {
-            $("#upr_1_rez").attr("placeholder", "30.0 (мин.сек)");
-        } else if ($(this).val() == "57b") {
-            $("#upr_1_rez").attr("placeholder", "9.00 (мин.сек)");
-        } else if ($(this).val() == "58") {
-            $("#upr_1_rez").attr("placeholder", "1.16 (мин.сек)");
-        } else if ($(this).val() == "51") {
-            $("#upr_1_rez").attr("placeholder", "850 (см)");
+    $("[numuprselect]").change(function () {
+        // полчаю варинт упражнения
+        let ii = $(this).attr('numuprselect');
+
+        reset(ii);
+        $("#upr_rezu_" + ii).val('');
+        switch ($(this).val()) {
+            case '40':
+                $("#upr_rezu_" + ii).attr("placeholder", "7.3 (сек)");
+                break;
+            case '41':
+                $("#upr_rezu_" + ii).attr("placeholder", "11.8 (сек)");
+                break;
+            case '42':
+                $("#upr_rezu_" + ii).attr("placeholder", "24.0 (сек)");
+                break;
+            case '57':
+                $("#upr_rezu_" + ii).attr("placeholder", "1.00 (мин.сек)");
+                break;
+            case "57a":
+                $("#upr_rezu_" + ii).attr("placeholder", "30.0 (мин.сек)");
+                break;
+            case "57b":
+                $("#upr_rezu_" + ii).attr("placeholder", "9.00 (мин.сек)");
+                break;
+            case '58':
+                $("#upr_rezu_" + ii).attr("placeholder", "1.16 (мин.сек)");
+                break;
+            case '51':
+                $("#upr_rezu_" + ii).attr("placeholder", "850 (см)");
+                break;
+            case '1':
+                $("#upr_rezu_" + ii).attr("placeholder", "75 (раз)");
+                break;
+            case '1':
+                $("#upr_rezu_" + ii).attr("placeholder", "75 (раз)");
+                break;
+            case '2':
+                $("#upr_rezu_" + ii).attr("placeholder", "70 (раз)");
+                break;
+            case '4':
+                $("#upr_rezu_" + ii).attr("placeholder", "30 (раз)");
+                break;
+            case '5':
+                $("#upr_rezu_" + ii).attr("placeholder", "36 (раз)");
+                break;
+            case '6':
+                $("#upr_rezu_" + ii).attr("placeholder", "32 (раз)");
+                break;
+            case '7':
+                $("#upr_rezu_" + ii).attr("placeholder", "15 (раз)");
+                break;
+            case '8_1':
+                $("#upr_rezu_" + ii).attr("placeholder", "21 (раз)");
+                break;
+            case '8_2':
+                $("#upr_rezu_" + ii).attr("placeholder", "29 (раз)");
+                break;
+            case '9':
+                $("#upr_rezu_" + ii).attr("placeholder", "50 (раз)");
+                break;
+            case '10':
+                $("#upr_rezu_" + ii).attr("placeholder", "54.0 (сек)");
+                break;
+            case '11_1':
+                $("#upr_rezu_" + ii).attr("placeholder", "65 (раз)");
+                break;
+            case '11_2':
+                $("#upr_rezu_" + ii).attr("placeholder", "75 (раз)");
+                break;
+            case '12_1':
+                $("#upr_rezu_" + ii).attr("placeholder", "22 (раза)");
+                break;
+            case '12_2':
+                $("#upr_rezu_" + ii).attr("placeholder", "30 (раз)");
+                break;
+            case '13_1':
+                $("#upr_rezu_" + ii).attr("placeholder", "18 (раз)");
+                break;
+            case '13_2':
+                $("#upr_rezu_" + ii).attr("placeholder", "26 (раз)");
+                break;
+            case '62':
+                $("#upr_rezu_" + ii).attr("placeholder", "56 (раз)");
+                break;
+            case '45':
+                $("#upr_rezu_" + ii).attr("placeholder", "3.10 (мин.сек)");
+                break;
+            case '46':
+                $("#upr_rezu_" + ii).attr("placeholder", "10.30 (мин.сек)");
+                break;
+            case '47':
+                $("#upr_rezu_" + ii).attr("placeholder", "16.20 (мин.сек)");
+                break;
+            case '43':
+                $("#upr_rezu_" + ii).attr("placeholder", "88.5 (сек)");
+                break;
+            case '53':
+                $("#upr_rezu_" + ii).attr("placeholder", "18.00 (мин.сек)");
+                break;
+            case '54':
+                $("#upr_rezu_" + ii).attr("placeholder", "40.00 (мин.сек)");
+                break;
+            case '57b':
+                $("#upr_rezu_" + ii).attr("placeholder", "7.00 (мин.сек)");
+                break;
+            default:
+                $("#upr_rezu_" + ii).attr("placeholder", "");
+                break;
         }
     });
 
-    $("#upr_2_select").change(function () {
-        $("#upr_2_rez").val('');
-        $("#upr_2_ball").html('');
-        $("#upr_2_help").html('');
-        if ($(this).val() == 1) {
-            $("#upr_2_rez").attr("placeholder", "75 (раз)");
-        } else if ($(this).val() == 2) {
-            $("#upr_2_rez").attr("placeholder", "70 (раз)");
-        } else if ($(this).val() == 4) {
-            $("#upr_2_rez").attr("placeholder", "30 (раз)");
-        } else if ($(this).val() == 5) {
-            $("#upr_2_rez").attr("placeholder", "36 (раз)");
-        } else if ($(this).val() == "6") {
-            $("#upr_2_rez").attr("placeholder", "32 (раз)");
-        } else if ($(this).val() == "7") {
-            $("#upr_2_rez").attr("placeholder", "15 (раз)");
-        } else if ($(this).val() == "8_1") {
-            $("#upr_2_rez").attr("placeholder", "21 (раз)");
-        } else if ($(this).val() == "8_2") {
-            $("#upr_2_rez").attr("placeholder", "29 (раз)");
-        } else if ($(this).val() == "9") {
-            $("#upr_2_rez").attr("placeholder", "50 (раз)");
-        } else if ($(this).val() == "10") {
-            $("#upr_2_rez").attr("placeholder", "54.0 (сек)");
-        } else if ($(this).val() == "11_1") {
-            $("#upr_2_rez").attr("placeholder", "65 (раз)");
-        } else if ($(this).val() == "11_2") {
-            $("#upr_2_rez").attr("placeholder", "75 (раз)");
-        } else if ($(this).val() == "12_1") {
-            $("#upr_2_rez").attr("placeholder", "22 (раз)");
-        } else if ($(this).val() == "12_2") {
-            $("#upr_2_rez").attr("placeholder", "30 (раз)");
-        } else if ($(this).val() == "13_1") {
-            $("#upr_2_rez").attr("placeholder", "18 (раз)");
-        } else if ($(this).val() == "13_2") {
-            $("#upr_2_rez").attr("placeholder", "26 (раз)");
-        } else if ($(this).val() == "62") {
-            $("#upr_2_rez").attr("placeholder", "56 (раз)");
-        }
-    });
 
-    $("#upr_3_select").change(function () {
-        if ($(this).val() == 45) {
-            $("#upr_3_rez").attr("placeholder", "3.10 (мин.сек)");
-        } else if ($(this).val() == 46) {
-            $("#upr_3_rez").attr("placeholder", "10.30 (мин.сек)");
-        } else if ($(this).val() == 47) {
-            $("#upr_3_rez").attr("placeholder", "16.20 (мин.сек)");
-        } else if ($(this).val() == 43) {
-            $("#upr_3_rez").attr("placeholder", "88.5 (сек)");
-        } else if ($(this).val() == "53") {
-            $("#upr_3_rez").attr("placeholder", "18.00 (мин.сек)");
-        } else if ($(this).val() == "54") {
-            $("#upr_3_rez").attr("placeholder", "40.00 (мин.сек)");
-        } else if ($(this).val() == "57b") {
-            $("#upr_3_rez").attr("placeholder", "7.00 (мин.сек)");
-        }
-    });
-
-
-    // выбор упражнения
+    // ввод результата
     $("[numupr]").change(function () {
         // номер выбранного упражнения
         let numupr = $(this).attr('numupr');
@@ -233,13 +275,13 @@ $(document).ready(function () {
              */
             let complit = false;
 
-            // если три заполнено
+            // если 3 заполнено
             if (summ_upr == 3 && !isEmpty(r1) && !isEmpty(r2) && !isEmpty(r3))
                 complit = true;
-
+            // если 4 заполнено
             if (summ_upr == 4 && !isEmpty(r1) && !isEmpty(r2) && !isEmpty(r3) && !isEmpty(r4))
                 complit = true;
-
+            // если 5 заполнено
             if (summ_upr == 5 && !isEmpty(r1) && !isEmpty(r2) && !isEmpty(r3) && !isEmpty(r4) && !isEmpty(r5))
                 complit = true;
 
@@ -266,8 +308,6 @@ $(document).ready(function () {
                     $("#score_level").html(json.level);
                 });
             }
-
-
         });
 
         request.fail(function (jqXHR, textStatus) {
