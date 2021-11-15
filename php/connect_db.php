@@ -13,6 +13,12 @@ use Krugozor\Database\Mysql;
 use Krugozor\Database\Statement;
 use Krugozor\Database\MySqlException;
 
+
+/**
+ * Подключение к БД
+ *
+ * @var Mysql $db
+ */
 $db = Mysql::create($DB_HOST, $DB_USER, $DB_PASS)
         ->setDatabaseName($DB_NAME)
         ->setCharset("utf8")

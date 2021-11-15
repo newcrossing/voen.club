@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="ru" prefix="og: http://ogp.me/ns#">
 <head>
     <meta charset="utf-8">
@@ -71,9 +72,10 @@
                         <option value="3">30 - 34</option>
                         <option value="4">35 - 39</option>
                         <option value="5">40 - 44</option>
-                        <option value="6">45 - 49</option>
-                        <option value="7">50 - 54</option>
-                        <option value="8">55 и старше</option>
+                        <option value="6" id="age6_m">45 - 49</option>
+                        <option value="6" id="age6_w" style="display: none">45 и старше</option>
+                        <option value="7" id="age7_m">50 - 54</option>
+                        <option value="8" id="age8_m">55 и старше</option>
                     </select>
                     <small class="text-muted" id="age-help">1-я возрастная группа</small>
                 </div>
@@ -317,19 +319,19 @@
                     </div>
                     <div class="card-body">
                         <h1 class="card-title pricing-card-title text-center text-success" id="score"></h1>
-                        <p class="h3 text-center" id="score_level"></p>
+                        <p class="fs-6 text-center text-muted" id="score_prefix"></p>
+                        <p class="h3 text-center text-uppercase text-success" id="score_level"></p>
 
                         <ul class="list-unstyled mt-3 mb-4">
                             <li></li>
                             <li></li>
-
                         </ul>
+                        <div id="score_table">
 
+                        </div>
                     </div>
                 </div>
             </div>
-
-
         </div>
     </div>
 
@@ -359,8 +361,7 @@
                             </button>
                         </div>
                         <div class="modal-body text-left">
-                            <?
-                            include_once('./new.txt') ?>
+                            <? include_once('./new.txt') ?>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть
@@ -385,18 +386,19 @@
     (function (m, e, t, r, i, k, a) {
         m[i] = m[i] || function () {
             (m[i].a = m[i].a || []).push(arguments)
-        };
-        m[i].l = 1 * new Date();
-        k = e.createElement(t), a = e.getElementsByTagName(t)[0], k.async = 1, k.src = r, a.parentNode.insertBefore(k, a)
+        }
+        m[i].l = 1 * new Date()
+        k = e.createElement(t), a = e.getElementsByTagName(t)[0], k.async = 1, k.src = r, a.parentNode.insertBefore(k,
+            a)
     })
-    (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+    (window, document, 'script', 'https://mc.yandex.ru/metrika/tag.js', 'ym')
 
-    ym(85995842, "init", {
+    ym(85995842, 'init', {
         clickmap: true,
         trackLinks: true,
         accurateTrackBounce: true,
-        webvisor: true
-    });
+        webvisor: true,
+    })
 </script>
 <noscript>
     <div><img src="https://mc.yandex.ru/watch/85995842" style="position:absolute; left:-9999px;" alt=""/></div>

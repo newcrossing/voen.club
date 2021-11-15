@@ -10,7 +10,7 @@ use Krugozor\Database\Mysql;
 use Krugozor\Database\Statement;
 use Krugozor\Database\MySqlException;
 
-$db = Mysql::create('localhost', 'root', '');
+//$db = Mysql::create('localhost', 'root', '');
 
 try {
     // Наглядный пример двух режимов работы библиотеки:

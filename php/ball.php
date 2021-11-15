@@ -1,4 +1,21 @@
 <?php
+/**
+ * @global $UPR
+ * @global $SEX
+ * @global $AGE
+ * @global $REZ
+ * @global $SUMM_UPR
+ * @global $CATEGORY
+ * @global $BALLI_M
+ * @global $BALLI_W
+ * @global $SCORE
+ * @global $BALL_FROM_OCENKA_M
+ * @global $BALL_FROM_OCENKA_W
+ * @global $OCENKI_TEXT
+ * @global $MIN_BALL_M
+ * @global $MIN_BALL_W
+ * @global $db
+ */
 
 // упражнение с оценкой
 if ($UPR == 'upr_00' || $UPR == 'upr_00_w') {
@@ -6,16 +23,16 @@ if ($UPR == 'upr_00' || $UPR == 'upr_00_w') {
     $b = ($SEX) ? $BALL_FROM_OCENKA_M[$AGE][$CATEGORY][$REZ] : $BALL_FROM_OCENKA_W[$AGE][$REZ];
 
     $JSON['ball'] = $b;
-    $JSON['color'] = $ocenki_text[$REZ]['color'];
-    $JSON['text'] = $ocenki_text[$REZ]['text'][rand(0, count($ocenki_text[$REZ]['text']) - 1)];
-    $JSON['text2'] = $ocenki_text[$REZ]['text2'][rand(0, count($ocenki_text[$REZ]['text2']) - 1)];
+    $JSON['color'] = $OCENKI_TEXT[$REZ]['color'];
+    $JSON['text'] = $OCENKI_TEXT[$REZ]['text'][rand(0, count($OCENKI_TEXT[$REZ]['text']) - 1)];
+    $JSON['text2'] = $OCENKI_TEXT[$REZ]['text2'][rand(0, count($OCENKI_TEXT[$REZ]['text2']) - 1)];
     $json = json_encode($JSON, JSON_UNESCAPED_UNICODE);
     echo $json;
     exit();
 }
 
 
-$res = $db->query('SELECT MAX(rezult) as max, MIN(rezult) as min, type FROM ?f', $UPR);
+$res = $db->query('SELECT MAX(rezult) as max, MIN(rezult) as min, type FROM ?f GROUP BY type', $UPR);
 $data = $res->fetchAssoc();
 
 // локальный максимальный результат
@@ -36,6 +53,7 @@ if ($data['type'] == 'min') {
 /**
  * Минимальный пороговый бал
  * в зависимости от пола
+ *
  * @type integer
  */
 $MIN_BALL = ($SEX) ? $MIN_BALL_M[$AGE] : $MIN_BALL_W[$AGE];
@@ -48,9 +66,9 @@ if ($bad) {
     $JSON['ball'] = 0;
     $JSON['color'] = 'text-danger';
     $JSON['text'] = 'Ниже минимального результа';
-    $JSON['text2'] = 'Увеличь результат как минимум до '.$dataMin['rezult'].' '.$dataMin['format']
-            .' для своей возрастной группы. Осталось всего '
-            .diffRez($dataMin['rezult'], $REZ, $dataMin['format']);
+    $JSON['text2'] = 'Увеличь результат как минимум до ' . $dataMin['rezult'] . ' ' . $dataMin['format']
+        . ' для своей возрастной группы. Осталось всего '
+        . diffRez($dataMin['rezult'], $REZ, $dataMin['format']);
     $json = json_encode($JSON, JSON_UNESCAPED_UNICODE);
     echo $json;
     exit();
@@ -81,9 +99,9 @@ if ($data['ball'] < $MIN_BALL) {
     $JSON['ball'] = $data['ball'];
     $JSON['color'] = 'text-danger';
     $JSON['text'] = 'Ниже минимального результа.';
-    $JSON['text2'] = 'Увеличь результат как минимум до '.$dataMin['rezult'].' '.$dataMin['format']
-            .' для своей возрастной группы. Осталось всего '
-            .diffRez($dataMin['rezult'], $REZ, $dataMin['format']);
+    $JSON['text2'] = 'Увеличь результат как минимум до ' . $dataMin['rezult'] . ' ' . $dataMin['format']
+        . ' для своей возрастной группы. Осталось всего '
+        . diffRez($dataMin['rezult'], $REZ, $dataMin['format']);
     $json = json_encode($JSON, JSON_UNESCAPED_UNICODE);
     echo $json;
     exit();

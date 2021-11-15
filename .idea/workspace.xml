@@ -24,18 +24,34 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="66460d6f-2d87-438f-b060-89953dbb5b5f" name="Default Changelist" comment="">
+    <list default="true" id="66460d6f-2d87-438f-b060-89953dbb5b5f" name="Default Changelist" comment="правка">
+      <change afterPath="$PROJECT_DIR$/php/scores.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/localhost.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/localhost.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config.php" beforeDir="false" afterPath="$PROJECT_DIR$/config.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/configDB.php" beforeDir="false" afterPath="$PROJECT_DIR$/configDB.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/css/bootstrap.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/css/bootstrap.min.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/index.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/bootstrap.bundle.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/bootstrap.bundle.min.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/js/script.js" beforeDir="false" afterPath="$PROJECT_DIR$/js/script.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.php" beforeDir="false" afterPath="$PROJECT_DIR$/main.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/new.txt" beforeDir="false" afterPath="$PROJECT_DIR$/new.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/php/allball.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/allball.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/php/ball.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/ball.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/php/connect_db.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/connect_db.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/php/db.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/db.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test.php" beforeDir="false" afterPath="$PROJECT_DIR$/test.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/упражнения" beforeDir="false" afterPath="$PROJECT_DIR$/упражнения" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ComposerSettings">
-    <execution />
+  <component name="ComposerSettings" synchronizationState="DONT_SYNCHRONIZE">
+    <execution>
+      <executable path="composer" />
+    </execution>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -46,6 +62,11 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="PhpWorkspaceProjectConfiguration" interpreter_name="PHP 8.0">
+    <include_path>
+      <path value="/usr/share/php" />
+    </include_path>
   </component>
   <component name="ProjectId" id="1zPaptOYPTKh6nHTmb35HPYiXkn" />
   <component name="ProjectViewState">
@@ -58,7 +79,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="settings.editor.selected.configurable" value="vcs.Git" />
+    <property name="settings.editor.selected.configurable" value="preferences.sourceCode.JavaScript" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
@@ -86,7 +107,25 @@
       <workItem from="1636181763951" duration="3481000" />
       <workItem from="1636197956616" duration="3634000" />
       <workItem from="1636983645083" duration="79000" />
+      <workItem from="1636984156681" duration="618000" />
+      <workItem from="1636985891733" duration="3105000" />
+      <workItem from="1636990801942" duration="12779000" />
     </task>
+    <task id="LOCAL-00001" summary="правка">
+      <created>1636984425277</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1636984425277</updated>
+    </task>
+    <task id="LOCAL-00002" summary="правка">
+      <created>1636984441057</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1636984441057</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -103,5 +142,9 @@
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="правка" />
+    <option name="LAST_COMMIT_MESSAGE" value="правка" />
   </component>
 </project>
