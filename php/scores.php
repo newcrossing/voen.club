@@ -24,27 +24,27 @@ if ($SEX) {
 
 
     <ul class="list-group">
-        <li class="list-group-item d-flex justify-content-between align-items-center  text-dark">
+        <li class="list-group-item d-flex justify-content-between align-items-center  text-dark" id="score3">
             <small>Оценка 3</small>
             <span class="badge bg-warning "><?= $arr[3] ?></span>
         </li>
-        <li class="list-group-item d-flex justify-content-between align-items-center  text-dark">
+        <li class="list-group-item d-flex justify-content-between align-items-center  text-dark" id="score4">
             <small>Оценка 4</small>
             <span class="badge bg-primary"><?= $arr[4] ?></span>
         </li>
-        <li class="list-group-item d-flex justify-content-between align-items-center  text-dark">
+        <li class="list-group-item d-flex justify-content-between align-items-center  text-dark" id="score5">
             <small>3 уровень (оценка 5)</small>
             <span class="badge bg-success"><?= $arr[5] ?></span>
         </li>
-        <li class="list-group-item d-flex justify-content-between align-items-center  text-dark">
+        <li class="list-group-item d-flex justify-content-between align-items-center  text-dark" id="score6">
             <small>2 уровень (оценка 5)</small>
             <span class="badge bg-success"><?= $arr[6] ?></span>
         </li>
-        <li class="list-group-item d-flex justify-content-between align-items-center  text-dark">
+        <li class="list-group-item d-flex justify-content-between align-items-center  text-dark" id="score7">
             <small>1 уровень (оценка 5)</small>
             <span class="badge bg-success"><?= $arr[7] ?></span>
         </li>
-        <li class="list-group-item d-flex justify-content-between align-items-center  text-dark">
+        <li class="list-group-item d-flex justify-content-between align-items-center  text-dark" id="score8">
             <small>Высший уровень (оценка 5)</small>
             <span class="badge bg-success"><?= $arr[8] ?></span>
         </li>

@@ -10,6 +10,11 @@
     <meta name="docsearch:language" content="ru">
     <meta name="docsearch:version" content="5.0">
     <meta name="yandex-verification" content="2bf0709983ffc58f"/>
+
+    <meta http-equiv="Cache-Control" content="no-cache"/>
+    <meta http-equiv="Pragma" content="no-cache"/>
+    <meta http-equiv="Expires" content="0"/>
+
     <title>Онлайн калькулятор по физической подготовке военнослужащих Минобороны</title>
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -143,7 +148,7 @@
                 <h4 class="mb-3">Результаты</h4>
 
                 <div class="col-8">
-                    <label for="upr_select_1" class="form-label">Скорость</label>
+                    <label for="upr_select_1" class="form-label">Быстрота (ловкость) </label>
                     <select class="form-select" id="upr_select_1" required="" numuprselect="1">
                         <option value="40" selected="selected">Упр. № 40 (Бег на 60 м)</option>
                         <option value="41">Упр. № 41 (Бег на 100 м)</option>
@@ -154,6 +159,9 @@
                         <option value="57b" id="57b_w" style="display: none">Упр. № 57,б (Плавание 300)</option>
                         <option value="58" style="display:none ">Упр. № 58 (Плавание 100 м способом брасс)</option>
                         <option value="51" id="51_m" style="display:none ">Упр. № 51 (Тройной прыжок с места)</option>
+
+                        <option value="00">Оценка за упражнение на ловкость (5,4,3,2)</option>
+
                     </select>
                     <small class="text-muted" id="upr_help_1"></small>
                 </div>
@@ -218,12 +226,12 @@
                     <small class="text-muted" id="upr_ball_3"></small>
                 </div>
 
-
                 <div class="col-8" id="upr_4_div1" style="display: none">
                     <label for="upr_select_4" class="form-label">Военно-прикладные навыки</label>
                     <select class="form-select" id="upr_select_4" required="" numuprselect="4">
-                        <option value="00">Упражнение с оценкой</option>
-                        <option value="52" selected="selected">Упр. № 52 (Метание гранаты на дальность)</option>
+                        <option value="00" selected="selected">Упражнение с оценкой</option>
+                        <option value="25" >Упр. № 25 (обороты вперед - назад на лопинге)</option>
+                        <option value="52" >Упр. № 52 (Метание гранаты на дальность)</option>
                         <option value="60">Упр. №60 (Ныряние в длину)</option>
                     </select>
                     <small class="text-muted" id="upr_help_4"></small>
@@ -332,6 +340,17 @@
                     </div>
                 </div>
             </div>
+            <div class="col">
+                <div class="card mb-4 shadow-sm">
+                    <div class="card-header">
+                        <h4 class="my-0 font-weight-normal">Пожертвование</h4>
+                    </div>
+                    <div class="card-body">
+                        <div>На развитие проекта </div>
+                        <iframe width="220" height="100" src="https://widget.qiwi.com/widgets/big-button-220x100?publicKey=48e7qUxn9T7RyYE1MVZswX1FRSbE6iyCj2gCRwwF3Dnh5XrasNTx3BGPiMsyXQFNKQhvukniQG8RTVhYm3iPq1vPyF7MHbdmuGf99Rp2qcYHpTSaaUbo9tzEWSWgFgz7xMKMWW334yQyaM73ESf8yxNdqwdXbk9wGkDDNzz8mvDcWm61xdLRp3DXXTFsn" allowtransparency="true" scrolling="no" frameborder="0"></iframe>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -361,7 +380,7 @@
                             </button>
                         </div>
                         <div class="modal-body text-left">
-                            <? include_once('./new.txt') ?>
+                            <?php include_once('./new.txt') ?>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть
@@ -379,7 +398,7 @@
 
 <script src="/js/bootstrap.bundle.min.js"></script>
 <script src="/js/jquery-3.6.0.min.js"></script>
-<script src="/js/script.js"></script>
+<script src="/js/script.js?v=3"></script>
 
 <!-- Yandex.Metrika counter -->
 <script type="text/javascript">

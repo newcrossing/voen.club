@@ -30,6 +30,7 @@ if ($REZ < min($arr)) {
     $JSON['level'] = '';
     $JSON['color'] = 'text-danger';
     $JSON['text'] = 'Мои соболезнования';
+    $JSON['n'] = 2;
     $json = json_encode($JSON, JSON_UNESCAPED_UNICODE);
     echo $json;
     exit();
@@ -42,6 +43,7 @@ if ($REZ >= max($arr)) {
     $JSON['level'] = 'высший уровень';
     $JSON['color'] = 'text-success';
     $JSON['text'] = 'Мои поздравления';
+    $JSON['n'] = 8;
     $json = json_encode($JSON, JSON_UNESCAPED_UNICODE);
     echo $json;
     exit();
@@ -60,6 +62,7 @@ $JSON['score'] = $SCORE[$i]['score'];
 $JSON['score_prefix'] = $SCORE[$i]['score_prefix'];
 $JSON['level'] = $SCORE[$i]['level'];
 $JSON['color'] = $SCORE[$i]['color'];
+$JSON['n'] = $i;
 $JSON['text'] = 'Мои поздравления';
 $json = json_encode($JSON, JSON_UNESCAPED_UNICODE);
 echo($json);

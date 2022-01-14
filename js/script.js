@@ -86,30 +86,7 @@ $(document).ready(function () {
 
     $('#age').change(function () {
         reset()
-        if ($(this).val() == 1) {
-            $('#age-help').text('1-я возрастная группа')
-        }
-        else if ($(this).val() == 2) {
-            $('#age-help').text('2-я возрастная группа')
-        }
-        else if ($(this).val() == 3) {
-            $('#age-help').text('3-я возрастная группа')
-        }
-        else if ($(this).val() == 4) {
-            $('#age-help').text('4-я возрастная группа')
-        }
-        else if ($(this).val() == 5) {
-            $('#age-help').text('5-я возрастная группа')
-        }
-        else if ($(this).val() == 6) {
-            $('#age-help').text('6-я возрастная группа')
-        }
-        else if ($(this).val() == 7) {
-            $('#age-help').text('7-я возрастная группа')
-        }
-        else {
-            $('#age-help').text('8-я возрастная группа')
-        }
+        $('#age-help').text($(this).val() + '-я возрастная группа')
         sendAjax()
     })
     /**
@@ -118,23 +95,17 @@ $(document).ready(function () {
     $('#sex').change(function () {
         reset()
         if ($(this).val() == '0') {
-            $('#57b_m').hide()
+            $('#57b_m, #51_m').hide()
             $('#57b_w').show()
-            $('#51_m').hide()
 
-            $('#age7_m').hide()
-            $('#age8_m').hide()
-            $('#age6_m').hide()
+            $('#age6_m, #age7_m, #age8_m').hide()
             $('#age6_w').show()
         }
         else if ($(this).val() == 1) {
             $('#57b_w').hide()
-            $('#57b_m').show()
-            $('#51_m').show()
+            $('#57b_m, #51_m').show()
 
-            $('#age7_m').show()
-            $('#age8_m').show()
-            $('#age6_m').show()
+            $('#age6_m, #age7_m, #age8_m').show()
             $('#age6_w').hide()
         }
         sendAjax()
@@ -148,31 +119,23 @@ $(document).ready(function () {
 
     // при измнении количества упражнений
     $('#summ_upr').change(function () {
-        $('#score').html('')
-        $('#score_level').html('')
+        reset()
+        $('#score, #score_level').html('')
+
         if ($(this).val() == 3) {
-            $('#upr_4_div1').hide()
-            $('#upr_4_div2').hide()
-            $('#upr_5_div1').hide()
-            $('#upr_5_div2').hide()
-            $('#recomend_block_4').hide()
-            $('#recomend_block_5').hide()
+            $('#upr_4_div1, #upr_4_div2, #upr_5_div1, #upr_5_div2').hide()
+            $('#recomend_block_4, #recomend_block_5').hide()
         }
         else if ($(this).val() == 4) {
-            $('#upr_4_div1').show()
-            $('#upr_4_div2').show()
-            $('#upr_5_div1').hide()
-            $('#upr_5_div2').hide()
+            $('#upr_4_div1, #upr_4_div2').show()
+            $('#upr_5_div1, #upr_5_div2').hide()
+
             $('#recomend_block_4').show()
             $('#recomend_block_5').hide()
         }
         else if ($(this).val() == 5) {
-            $('#upr_4_div1').show()
-            $('#upr_4_div2').show()
-            $('#upr_5_div1').show()
-            $('#upr_5_div2').show()
-            $('#recomend_block_4').show()
-            $('#recomend_block_5').show()
+            $('#upr_4_div1, #upr_4_div2, #upr_5_div1, #upr_5_div2').show()
+            $('#recomend_block_4, #recomend_block_5').show()
         }
         sendAjax()
     })
@@ -297,13 +260,13 @@ $(document).ready(function () {
         let numupr = $(this).attr('numupr')
 
         reset(numupr)
+        resetScore()
 
         let upr = $('#upr_select_' + numupr).val()
         let rez = $('#upr_rezu_' + numupr).val()
         let sex = $('#sex').val()
         let age = $('#age').val()
         let category = $('#category').val()
-        // alert(rez);
 
         var request = $.ajax({
             url: 'main.php',
@@ -324,16 +287,16 @@ $(document).ready(function () {
             let json = JSON.parse(msg)
             $('#upr_ball_' + numupr).
                 html(json.ball + ' баллa(ов) ').
-                removeClass('text-muted text-danger text-success').
+                removeClass(arrColor.join(' ')).
                 addClass(json.color)
             $('#recomend_ball_' + numupr).html(json.ball)
             $('#upr_help_' + numupr).
                 html(json.text).
-                removeClass('text-muted text-danger text-success').
+                removeClass(arrColor.join(' ')).
                 addClass(json.color)
             $('#recomend_text_' + numupr).html(json.text2)
             $('#recomend_color_' + numupr).
-                removeClass('text-muted text-danger text-success').
+                removeClass(arrColor.join(' ')).
                 addClass(json.color)
 
             // подсчет общего результа
@@ -358,7 +321,6 @@ $(document).ready(function () {
             let rc3 = $('#upr_ball_3').hasClass('text-danger')
             let rc4 = $('#upr_ball_4').hasClass('text-danger')
             let rc5 = $('#upr_ball_5').hasClass('text-danger')
-//console.log(rс1);
 
             /**
              * Признак заполенности результатов и возможности подсчитать общий
@@ -390,7 +352,6 @@ $(document).ready(function () {
             }
 
             // Если есть уже ниже порогового
-            // если 5 заполнено
             if (rc1 || rc2 || rc3 || rc4 || rc5) {
                 resetScore()
                 $('#score').html('2').addClass('text-danger')
@@ -415,12 +376,17 @@ $(document).ready(function () {
                 requestBall.done(function (msg) {
                     // ПОЛУЧИЛИ ДАННЫЕ ИТОГОВАЯ ОЦЕНКА
                     //alert(msg);
+                    $('#score1, #score2,#score3,#score4,#score5,#score6,#score7,#score8').removeClass('bg-info')
                     resetScore()
                     let json = JSON.parse(msg)
 
                     $('#score').html(json.score).addClass(json.color)
                     $('#score_prefix').html(json.score_prefix)
                     $('#score_level').html(json.level).addClass(json.color)
+
+                    if (json.n == 3 || json.n == 4 || json.n == 5 || json.n == 6 || json.n == 7 || json.n ==8 ){
+                        $('#score'+json.n ).addClass('bg-info')
+                    }
 
                 })
             }
